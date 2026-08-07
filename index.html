@@ -5,16 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07080d" />
     <meta name="description" content="Johan McGwire — Senior staff engineer building distributed systems and AI infrastructure at Coinbase." />
+
+    <!-- Link previews (iMessage, Slack, Discord, LinkedIn, X). These scrapers do
+         not run JavaScript, so the card has to be declared here in the static
+         shell rather than rendered by React. og:image must be an absolute URL. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Johan McGwire" />
+    <meta property="og:url" content="https://mcgwire.tech/" />
+    <meta property="og:title" content="Johan McGwire — Senior Staff SRE" />
+    <meta property="og:description" content="Senior staff engineer building distributed systems and AI infrastructure at Coinbase. Go, TypeScript, Temporal, and a lot of agents." />
+    <meta property="og:image" content="https://mcgwire.tech/og.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Johan McGwire — Senior staff engineer at Coinbase" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Johan McGwire — Senior Staff SRE" />
+    <meta name="twitter:description" content="Senior staff engineer building distributed systems and AI infrastructure at Coinbase." />
+    <meta name="twitter:image" content="https://mcgwire.tech/og.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png" />
-    <title>Johan McGwire</title>
+    <title>Johan McGwire — Senior Staff Site Reliability Engineer</title>
+    <link rel="canonical" href="https://mcgwire.tech/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=block" rel="stylesheet" />
+
+    <!-- Structured data: tells Google who this person is rather than making it
+         infer identity from rendered text it may not have crawled yet. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Johan McGwire",
+      "url": "https://mcgwire.tech/",
+      "image": "https://mcgwire.tech/headshot.jpg",
+      "jobTitle": "Senior Staff Site Reliability Engineer",
+      "worksFor": { "@type": "Organization", "name": "Coinbase" },
+      "email": "mailto:johan@mcgwire.tech",
+      "sameAs": ["https://github.com/Yohan460"],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "The Ohio State University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Columbus",
+        "addressRegion": "OH",
+        "addressCountry": "US"
+      },
+      "knowsAbout": ["Site Reliability Engineering", "Go", "TypeScript", "Temporal",
+        "Kubernetes", "AWS", "Distributed Systems", "AI Agents", "Terraform", "macOS MDM"]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -29,6 +29,16 @@ const CATEGORIES: Array<{
     ],
   },
   {
+    label: 'AI Systems',
+    tags: [
+      { name: 'Multi-Agent Orchestration', weight: 'w-primary' },
+      { name: 'MCP Servers', weight: 'w-secondary' },
+      { name: 'ReAct Loops', weight: 'w-secondary' },
+      { name: 'Agentic Platforms', weight: 'w-tertiary' },
+      { name: 'Data Sanitization', weight: 'w-quaternary' },
+    ],
+  },
+  {
     label: 'Platforms & Tooling',
     tags: [
       { name: 'Temporal', weight: 'w-primary' },
@@ -37,6 +47,18 @@ const CATEGORIES: Array<{
       { name: 'Okta', weight: 'w-tertiary' },
       { name: 'Jamf', weight: 'w-tertiary' },
       { name: 'SCCM', weight: 'w-quaternary' },
+    ],
+  },
+  {
+    label: 'Leadership & Communication',
+    tags: [
+      { name: 'Mentorship', weight: 'w-primary' },
+      { name: 'Public Speaking', weight: 'w-secondary' },
+      { name: 'Stakeholder Engagement', weight: 'w-secondary' },
+      { name: 'Executive Communication', weight: 'w-secondary' },
+      { name: 'Incident Command', weight: 'w-tertiary' },
+      { name: 'Technical Demos', weight: 'w-tertiary' },
+      { name: 'Change Management', weight: 'w-quaternary' },
     ],
   },
 ]
@@ -49,7 +71,7 @@ export default function Stack() {
     <section className="stack-section" aria-label="Technical skills">
       <div className="section-header reveal" ref={headerRef}>
         <span className="section-label">Stack</span>
-        <h2 className="section-title">Languages &amp; Tools</h2>
+        <h2 className="section-title">Skills &amp; Tools</h2>
         <div className="section-rule" />
       </div>
       <div className="stack-categories reveal reveal-delay-1" ref={bodyRef}>
