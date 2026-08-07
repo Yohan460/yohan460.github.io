@@ -25,6 +25,30 @@ const exec = promisify(execFile)
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dist = path.join(root, 'dist')
 
+// Stamp the sitemap's <lastmod> from the last commit that touched the repo
+// rather than the build clock. A date that moves on every rebuild is noise,
+// and crawlers learn to discount a lastmod that always says "just now".
+// Runs before the Chrome check so the sitemap is stamped even when
+// prerendering is skipped.
+{
+  let day
+  try {
+    const { stdout } = await exec('git', ['log', '-1', '--format=%cI'], { cwd: root })
+    day = stdout.trim().slice(0, 10)
+  } catch {
+    day = new Date().toISOString().slice(0, 10)
+  }
+  const file = path.join(dist, 'sitemap.xml')
+  if (existsSync(file)) {
+    const xml = await readFile(file, 'utf8')
+    if (!xml.includes('<lastmod>')) {
+      await writeFile(file, xml.replace(/(<loc>[^<]*<\/loc>)/,
+        `$1\n    <lastmod>${day}</lastmod>`))
+      console.log(`\u2713 sitemap lastmod ${day}`)
+    }
+  }
+}
+
 const CHROME = [
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   '/Applications/Chromium.app/Contents/MacOS/Chromium',
