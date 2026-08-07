@@ -129,7 +129,10 @@ body::after {
 
 .hero-name {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(4rem, 11vw, 11rem);
+  /* "McGwire" is ~7.1x the font size wide and the hero leaves 84vw of room,
+     so it fits up to ~11.9vw. The 11vw preferred value is fine; the floor
+     must stay under 11vw at 320px (= 2.2rem) or it overflows narrow phones. */
+  font-size: clamp(2.2rem, 11vw, 11rem);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.03em;
@@ -268,6 +271,41 @@ section[id] { scroll-margin-top: 2rem; }
   top: 8vh;
   padding-top: 2rem;
   overflow: visible;
+}
+
+/* Mobile-only coaching entry (the sticky rail is hidden below 768px) */
+.coaching-mobile { display: none; }
+
+.coaching-role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.coaching-role-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  background: var(--surface);
+  padding: 0.8rem 1.05rem;
+}
+.coaching-role-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: var(--bright);
+}
+.coaching-role-period {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: #d4af00;
+  flex-shrink: 0;
 }
 
 /* UA card overrides — gold/navy */
@@ -445,7 +483,10 @@ section[id] { scroll-margin-top: 2rem; }
   overflow: hidden;
   margin-bottom: 1.5rem;
   content-visibility: auto;
-  contain-intrinsic-size: 0 400px;
+  /* `auto` keeps the last-rendered size instead of snapping back to the
+     placeholder — without it, a single-column mobile list (~1500px) collapses
+     to 400px while off-screen and shifts the page every time it scrolls in. */
+  contain-intrinsic-size: auto 400px;
 }
 
 .bullet-item {
@@ -684,7 +725,11 @@ footer {
 /* ── RESPONSIVE ── */
 
 /* Short viewports: compress chrome so the bullet grid keeps its room. */
-@media (max-height: 900px) {
+/* Short-viewport compression exists solely to fit a *pinned* card on screen.
+   Below 769px the card is unpinned and flows normally, so these must not
+   apply — a max-height there reserves less layout box than the content
+   occupies, and the next employer overlaps the overflow. */
+@media (min-width: 769px) and (max-height: 900px) {
   .employer-inner { top: 5vh; max-height: 91vh; }
   .employer-header { gap: 0.9rem; margin-bottom: 1.5rem; padding-top: 1.25rem; }
   .employer-logo-wrap { height: 44px; max-width: 160px; }
@@ -693,7 +738,7 @@ footer {
   .chip-row { margin-top: 1rem; }
 }
 
-@media (max-height: 720px) {
+@media (min-width: 769px) and (max-height: 720px) {
   .employer-header { margin-bottom: 1rem; padding-top: 0.75rem; }
   .employer-desc { font-size: 0.85rem; margin-bottom: 0.9rem; }
   .bullet-item { padding: 0.65rem 0.9rem; font-size: 0.76rem; }
@@ -707,10 +752,11 @@ footer {
      timeline depends on the year marker, which is hidden here. */
   .experience-grid { grid-template-columns: 1fr; }
   .experience-coaching { display: none; }
+  .coaching-mobile { display: block; }
   /* Unpin: a full-height card plus mobile chrome leaves nothing to scroll.
      The inline min-height (yearsSpan * 80vh) exists to pace the pinned
      scroll, so it must go too or Coinbase leaves ~400vh of blank space. */
-  .employer-inner { position: static; }
+  .employer-inner { position: static; top: auto; max-height: none; }
   .employer-block { min-height: 0 !important; padding-bottom: 3rem; }
   .bullet-item { flex-basis: 100%; }
   .year-marker { display: none; }

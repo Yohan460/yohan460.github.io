@@ -129,6 +129,13 @@ const UA_COACHING_ROLES = [
   { minYear: 2019, maxYear: 2021, title: 'Assistant Novice Coach',  period: '2019 – 2021' },
 ]
 
+const UA_COACHING_BULLETS = [
+  "Women's Rowing Program",
+  'On-water coaching & athlete development',
+  'Boat repair & fleet maintenance',
+  'Regatta logistics & travel coordination',
+]
+
 function EmployerCard({ emp, innerRef }: { emp: typeof EMPLOYERS[0]; innerRef: RefObject<HTMLDivElement> }) {
   return (
     <div className="employer-inner reveal" ref={innerRef}>
@@ -247,6 +254,36 @@ export default function Experience() {
               </div>
             </div>
           ))}
+
+          {/* Mobile only: the sticky concurrent rail is hidden below 768px,
+              so without this the coaching history is dropped entirely. */}
+          <div className="coaching-mobile">
+            <hr className="employer-divider" />
+            <div className="employer-block">
+              <div className="employer-inner">
+                <div className="employer-header">
+                  <div className="employer-meta">
+                    <div className="employer-name">Upper Arlington HS Rowing</div>
+                    <div className="employer-role">Women&rsquo;s Rowing Program</div>
+                    <div className="employer-period">2019 &ndash; 2026 &middot; Concurrent</div>
+                  </div>
+                </div>
+                <div className="coaching-role-list">
+                  {UA_COACHING_ROLES.map(r => (
+                    <div className="coaching-role-row" key={r.title}>
+                      <span className="coaching-role-title">{r.title}</span>
+                      <span className="coaching-role-period">{r.period}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="bullet-grid">
+                  {UA_COACHING_BULLETS.map(b => (
+                    <div className="bullet-item" key={b}>{b}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* ── right: shared concurrent slot — position driven by scroll, not time ── */}
@@ -274,10 +311,7 @@ export default function Experience() {
                   <div className="concurrent-degree">{coachingRole.title}</div>
                   <div className="concurrent-period">{coachingRole.period}</div>
                   <ul className="concurrent-highlights">
-                    <li>Women's Rowing Program</li>
-                    <li>On-water coaching &amp; athlete development</li>
-                    <li>Boat repair &amp; fleet maintenance</li>
-                    <li>Regatta logistics &amp; travel coordination</li>
+                    {UA_COACHING_BULLETS.map(b => <li key={b}>{b}</li>)}
                   </ul>
                 </div>
               </>
