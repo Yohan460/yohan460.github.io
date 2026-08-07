@@ -9,6 +9,19 @@ export default function Hero() {
       <div className="hero-grid" ref={gridRef} />
       <div className="hero-glow" ref={glowRef} />
       <div className="hero-content">
+        <picture className="hero-portrait">
+          <source srcSet="/headshot.webp" type="image/webp" />
+          <img
+            src="/headshot.jpg"
+            srcSet="/headshot.jpg 640w, /headshot@2x.jpg 1280w"
+            sizes="(max-width: 768px) 116px, 168px"
+            alt="Johan McGwire"
+            width={168}
+            height={168}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="hero-eyebrow">Systems Engineer &amp; Developer</div>
         <h1 className="hero-name">
           Johan<br /><span>McGwire</span>
